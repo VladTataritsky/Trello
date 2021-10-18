@@ -1,1 +1,21 @@
-info: Oct-12-2021 16:49:43: 	You don't have permissions!
+warn: Oct-18-2021 13:11:21: 	You don't have permissions!
+warn: Oct-18-2021 13:16:31: 	You don't have permissions!
+info: Oct-18-2021 13:25:06: 	Board has been successfully added
+info: Oct-18-2021 13:29:57: 	Board has been successfully deleted
+info: Oct-18-2021 13:31:12: 	Board has been successfully updated
+info: Oct-18-2021 13:40:14: 	Board has been successfully deleted
+info: Oct-18-2021 13:40:48: 	Board has been successfully deleted
+error: Oct-18-2021 13:48:58: 	ENOENT: no such file or directory, open 'C:\projects\study\nodeJS\expressJS\boars.json'
+error: Oct-18-2021 13:56:41: 	ENOENT: no such file or directory, open 'C:\projects\study\nodeJS\expressJS\boafrds.json'
+info: Oct-18-2021 13:57:17: 	Boards were successfully recieved
+info: Oct-18-2021 13:59:06: 	Board has been successfully added
+info: Oct-18-2021 14:00:02: 	Board has been successfully added
+info: Oct-18-2021 14:01:26: 	Board has been successfully added
+info: Oct-18-2021 14:03:23: 	Board has been successfully added
+info: Oct-18-2021 14:06:09: 	Board has been successfully updated
+info: Oct-18-2021 14:06:20: 	Board has been successfully deleted
+info: Oct-18-2021 14:12:10: 	Card has been successfully added
+info: Oct-18-2021 14:13:00: 	Card has been successfully added
+info: Oct-18-2021 14:13:06: 	Card has been successfully updated
+info: Oct-18-2021 14:15:36: 	Card has been successfully deleted
+info: Oct-18-2021 14:50:17: 	Cards were successfully recieved
