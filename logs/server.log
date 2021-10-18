@@ -19,3 +19,14 @@ info: Oct-18-2021 14:13:00: 	Card has been successfully added
 info: Oct-18-2021 14:13:06: 	Card has been successfully updated
 info: Oct-18-2021 14:15:36: 	Card has been successfully deleted
 info: Oct-18-2021 14:50:17: 	Cards were successfully recieved
+info: Oct-18-2021 16:07:05: 	Board has been successfully added
+info: Oct-18-2021 16:07:36: 	Board has been successfully added
+error: Oct-18-2021 16:18:37: 	"name" must be a string
+info: Oct-18-2021 16:18:37: 	Board has been successfully added
+info: Oct-18-2021 16:22:29: 	Board has been successfully added
+info: Oct-18-2021 16:24:00: 	Board has been successfully added
+error: Oct-18-2021 16:30:07: 	"name" is required
+info: Oct-18-2021 16:30:07: 	Board has been successfully added
+error: Oct-18-2021 16:38:20: 	"labels" must be an array
+info: Oct-18-2021 16:38:20: 	Card has been successfully added
+info: Oct-18-2021 16:38:34: 	Card has been successfully added

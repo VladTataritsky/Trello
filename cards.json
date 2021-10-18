@@ -6,7 +6,7 @@
     "estimate": "2 hours",
     "status": "ready",
     "dueDate": "11-01-2020",
-    "labels": "label 1"
+    "labels": ["label 1", "label 2", "label 3"]
   },
   {
     "name": "name 2",
@@ -15,7 +15,7 @@
     "estimate": "6 hours",
     "status": "successed",
     "dueDate": "03-01-2016",
-    "labels": "label 2"
+    "labels": ["label 1", "label 2", "label 3"]
   },
   {
     "name": "name 3",
@@ -24,6 +24,6 @@
     "estimate": "3 hours",
     "status": "canceled",
     "dueDate": "05-06-2014",
-    "labels": "label 3"
+    "labels": ["label 1", "label 2", "label 3"]
   }
 ]

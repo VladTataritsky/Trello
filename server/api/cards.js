@@ -2,6 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const bodyParser = require("body-parser");
 const logger = require("../../Logger");
+const Joi = require("joi");
 require("dotenv").config();
 
 const router = express.Router();
@@ -10,6 +11,25 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const ROLES = {
   ADMIN: "admin",
   USER: "user",
+};
+
+const cardSchema = Joi.object({
+  name: Joi.string().required(),
+  description: Joi.string(),
+  createdAt: Joi.string(),
+  estimate: Joi.string(),
+  dueDate: Joi.string(),
+  labels: Joi.array().items(Joi.string()),
+});
+
+const validateBody = body => {
+  const { error } = cardSchema.validate(JSON.parse(body), {
+    allowUnknown: true,
+  });
+
+  if (error) {
+    logger.error(error.message);
+  }
 };
 
 router
@@ -25,6 +45,7 @@ router
     });
   })
   .post(urlencodedParser, function (request, response) {
+    validateBody(request.body.data);
     fs.readFile("./../cards.json", "utf8", (err, data) => {
       if (err) {
         logger.error(err.message);
