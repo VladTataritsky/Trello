@@ -22,17 +22,5 @@
     "color": "Blue",
     "description": "description 4",
     "createdAt": "12-06-2021"
-  },
-  {
-    "name": "name 4",
-    "color": "Blue",
-    "description": "description 4",
-    "createdAt": "12-06-2021"
-  },
-  {
-    "name": "name 43",
-    "color": "red",
-    "description": "description 4",
-    "createdAt": "12-06-2021"
   }
 ]

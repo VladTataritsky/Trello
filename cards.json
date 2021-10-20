@@ -21,7 +21,7 @@
     "name": "name 3",
     "description": "description 3",
     "createdAt": "04-06-2014",
-    "estimate": "3 hours",
+    "estimate": "4 hours",
     "status": "canceled",
     "dueDate": "05-06-2014",
     "labels": ["label 1", "label 2", "label 3"]

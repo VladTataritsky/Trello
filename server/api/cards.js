@@ -3,15 +3,9 @@ const fs = require("fs");
 const bodyParser = require("body-parser");
 const logger = require("../../Logger");
 const Joi = require("joi");
-require("dotenv").config();
 
 const router = express.Router();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
-
-const ROLES = {
-  ADMIN: "admin",
-  USER: "user",
-};
 
 const cardSchema = Joi.object({
   name: Joi.string().required(),

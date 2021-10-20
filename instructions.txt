@@ -1,0 +1,49 @@
+1)npm install, cd server, node app
+
+2)Postman examples:
+
+'localhost:3000/boards'
+ GET:
+
+ POST: body = {
+     role: "admin",
+     data: {
+        "name": "name 5",
+        "color": "red",
+        "description": "description 5",
+        "createdAt": "10-01-2020"
+     }
+  }
+
+PUT: body = {
+     role: "admin",
+     data: {
+        "name": "name 5", // update board by name
+        "color": "green",
+        "description": "description 5",
+        "createdAt": "10-01-2010"
+     }
+  }
+DELETE: body = {
+     role: "admin",
+     data: {
+        "name": "name 5" // delete board by name
+     }
+  }
+
+'localhost:3000/cards'
+// same as boards, body example:
+
+{
+   role: "admin",
+   data: {
+      "name": "name 4",
+      "description": "description 4",
+      "createdAt": "04-06-2014",
+      "estimate": "2 hours",
+      "status": "canceled",
+      "dueDate": "05-06-2014",
+      "labels": ["label 1", "label 2", "label 3"]
+   }
+}
+
