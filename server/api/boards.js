@@ -12,6 +12,8 @@ const ROLES = {
   USER: "user",
 };
 
+const pathToBoardsFile = "./data/boards.json";
+
 const boardSchema = Joi.object({
   name: Joi.string().required(),
   color: Joi.string(),
@@ -19,20 +21,31 @@ const boardSchema = Joi.object({
   createdAt: Joi.string(),
 });
 
-const validateBody = body => {
-  const { error } = boardSchema.validate(JSON.parse(body), {
+const validateBody = (req, res, next) => {
+  const { error } = boardSchema.validate(JSON.parse(req.body.data), {
     allowUnknown: true,
   });
 
   if (error) {
     logger.error(error.message);
+  } else {
+    next();
+  }
+};
+
+const checkRole = (req, res, next) => {
+  if (req.body.role === ROLES.ADMIN) {
+    next();
+  } else {
+    logger.warn("You don't have permissions!");
+    res.end("You don't have permissions!");
   }
 };
 
 router
   .route("/")
   .get(function (request, response) {
-    fs.readFile("./../boards.json", "utf8", (err, data) => {
+    fs.readFile(pathToData, "utf8", (err, data) => {
       if (err) {
         logger.error(err.message);
         return;
@@ -41,10 +54,12 @@ router
       response.send(data);
     });
   })
-  .post(urlencodedParser, function (request, response) {
-    if (request.body.role === ROLES.ADMIN) {
-      validateBody(request.body.data);
-      fs.readFile("./../boards.json", "utf8", (err, data) => {
+  .post(
+    urlencodedParser,
+    validateBody,
+    checkRole,
+    function (request, response) {
+      fs.readFile(pathToBoardsFile, "utf8", (err, data) => {
         if (err) {
           logger.error(err.message);
           return;
@@ -53,7 +68,7 @@ router
         json.push(JSON.parse(request.body.data));
 
         fs.writeFile(
-          "./../boards.json",
+          pathToBoardsFile,
           JSON.stringify(json),
           function (err, result) {
             if (err) {
@@ -65,47 +80,37 @@ router
           }
         );
       });
-    } else {
-      logger.warn("You don't have permissions!");
-      response.end("You don't have permissions!");
     }
-  })
-  .put(urlencodedParser, function (request, response) {
-    validateBody(request.body.data);
-    if (request.body.role === ROLES.ADMIN) {
-      validateBody(request.body.data);
-      fs.readFile("./../boards.json", "utf8", (err, data) => {
-        if (err) {
-          logger.error(err.message);
-          return;
-        }
-        let json = JSON.parse(data);
-        const index = json.findIndex(
-          item => item.name === JSON.parse(request.body.data).name
-        );
-        json[index] = JSON.parse(request.body.data);
+  )
+  .put(urlencodedParser, validateBody, checkRole, function (request, response) {
+    fs.readFile(pathToBoardsFile, "utf8", (err, data) => {
+      if (err) {
+        logger.error(err.message);
+        return;
+      }
+      let json = JSON.parse(data);
+      const index = json.findIndex(
+        item => item.name === JSON.parse(request.body.data).name
+      );
+      json[index] = JSON.parse(request.body.data);
 
-        fs.writeFile(
-          "./../boards.json",
-          JSON.stringify(json),
-          function (err, result) {
-            if (err) {
-              logger.error(err.message);
-              response.end();
-            }
-            logger.info("Board has been successfully updated");
-            response.end("Board has been successfully updated");
+      fs.writeFile(
+        pathToBoardsFile,
+        JSON.stringify(json),
+        function (err, result) {
+          if (err) {
+            logger.error(err.message);
+            response.end();
           }
-        );
-      });
-    } else {
-      logger.warn("You don't have permissions!");
-      response.end("You don't have permissions!");
-    }
+          logger.info("Board has been successfully updated");
+          response.end("Board has been successfully updated");
+        }
+      );
+    });
   })
   .delete(urlencodedParser, function (request, response) {
     if (request.body.role === ROLES.ADMIN) {
-      fs.readFile("./../boards.json", "utf8", (err, data) => {
+      fs.readFile(pathToBoardsFile, "utf8", (err, data) => {
         if (err) {
           logger.error(err.message);
           return;
@@ -117,7 +122,7 @@ router
         json.splice(index, 1);
 
         fs.writeFile(
-          "./../boards.json",
+          pathToBoardsFile,
           JSON.stringify(json),
           function (err, result) {
             if (err) {

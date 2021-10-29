@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const logger = require("../../Logger");
 const Joi = require("joi");
 
+const pathCardsFile = "./data/cards.json";
+
 const router = express.Router();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
@@ -29,7 +31,7 @@ const validateBody = body => {
 router
   .route("/")
   .get(function (request, response) {
-    fs.readFile("./../cards.json", "utf8", (err, data) => {
+    fs.readFile(pathCardsFile, "utf8", (err, data) => {
       if (err) {
         logger.error(err.message);
         return;
@@ -40,7 +42,7 @@ router
   })
   .post(urlencodedParser, function (request, response) {
     validateBody(request.body.data);
-    fs.readFile("./../cards.json", "utf8", (err, data) => {
+    fs.readFile(pathCardsFile, "utf8", (err, data) => {
       if (err) {
         logger.error(err.message);
         return;
@@ -49,7 +51,7 @@ router
       json.push(JSON.parse(request.body.data));
 
       fs.writeFile(
-        "./../cards.json",
+        pathCardsFile,
         JSON.stringify(json),
         function (err, result) {
           if (err) {
@@ -63,7 +65,7 @@ router
     });
   })
   .put(urlencodedParser, function (request, response) {
-    fs.readFile("./../cards.json", "utf8", (err, data) => {
+    fs.readFile(pathCardsFile, "utf8", (err, data) => {
       if (err) {
         logger.error(err.message);
         return;
@@ -75,7 +77,7 @@ router
       json[index] = JSON.parse(request.body.data);
 
       fs.writeFile(
-        "./../cards.json",
+        pathCardsFile,
         JSON.stringify(json),
         function (err, result) {
           if (err) {
@@ -89,7 +91,7 @@ router
     });
   })
   .delete(urlencodedParser, function (request, response) {
-    fs.readFile("./../cards.json", "utf8", (err, data) => {
+    fs.readFile(pathCardsFile, "utf8", (err, data) => {
       if (err) {
         logger.error(err.message);
         return;
@@ -101,7 +103,7 @@ router
       json.splice(index, 1);
 
       fs.writeFile(
-        "./../cards.json",
+        pathCardsFile,
         JSON.stringify(json),
         function (err, result) {
           if (err) {

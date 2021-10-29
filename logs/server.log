@@ -43,3 +43,19 @@ info: Oct-20-2021 11:27:47: 	Board has been successfully updated
 info: Oct-20-2021 11:28:17: 	Board has been successfully updated
 info: Oct-20-2021 11:28:33: 	Board has been successfully updated
 info: Oct-20-2021 11:30:45: 	Card has been successfully updated
+error: Oct-29-2021 12:13:46: 	ENOENT: no such file or directory, open 'C:\projects\study\nodeJS\expressJS\boards.json'
+error: Oct-29-2021 12:14:27: 	ENOENT: no such file or directory, open 'C:\projects\study\nodeJS\expressJS\boards.json'
+error: Oct-29-2021 12:16:01: 	ENOENT: no such file or directory, open 'C:\projects\study\nodeJS\expressJS\data\boards.json'
+error: Oct-29-2021 12:16:48: 	ENOENT: no such file or directory, open 'C:\projects\study\nodeJS\expressJS\data\boards.json'
+error: Oct-29-2021 12:19:49: 	ENOENT: no such file or directory, open 'C:\projects\study\nodeJS\server\data\boards.json'
+info: Oct-29-2021 12:20:47: 	Boards were successfully recieved
+info: Oct-29-2021 12:41:42: 	Cards were successfully recieved
+info: Oct-29-2021 13:02:08: 	Board has been successfully added
+info: Oct-29-2021 13:05:57: 	Board has been successfully added
+info: Oct-29-2021 13:06:16: 	Board has been successfully added
+warn: Oct-29-2021 13:07:15: 	You don't have permissions!
+info: Oct-29-2021 13:07:15: 	Board has been successfully added
+info: Oct-29-2021 13:07:37: 	Board has been successfully added
+warn: Oct-29-2021 13:07:40: 	You don't have permissions!
+info: Oct-29-2021 13:13:37: 	Board has been successfully added
+warn: Oct-29-2021 13:13:41: 	You don't have permissions!
