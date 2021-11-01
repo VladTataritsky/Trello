@@ -1,7 +1,7 @@
 const express = require("express");
 const helmet = require("helmet");
-const boardsRouter = require("./api/boards");
-const cardsRouter = require("./api/cards");
+const boardsRouter = require("./routers/boards");
+const cardsRouter = require("./routers/cards");
 
 const app = express();
 
