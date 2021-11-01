@@ -1,97 +1,40 @@
-const fs = require("fs");
-const logger = require("../../Logger");
+const fs = require("fs").promises;
 
 const pathToBoardsFile = "./data/boards.json";
 
-class boardsService {
-  static getBoards(request, response) {
-    fs.readFile(pathToBoardsFile, "utf8", (err, data) => {
-      if (err) {
-        logger.error(err.message);
-        return;
-      }
-      logger.info("Boards were successfully recieved");
-      response.send(data);
+class BoardsService {
+  static async getBoards() {
+    return await fs.readFile(pathToBoardsFile, "utf8");
+  }
+
+  static async addBoard(body) {
+    await fs.readFile(pathToBoardsFile, "utf8").then(data => {
+      let json = JSON.parse(data);
+      json.push(JSON.parse(body));
+
+      fs.writeFile(pathToBoardsFile, JSON.stringify(json));
     });
   }
 
-  static addBoard(request, response) {
-    fs.readFile(pathToBoardsFile, "utf8", (err, data) => {
-      if (err) {
-        logger.error(err.message);
-        return;
-      }
+  static async updateBoard(body) {
+    await fs.readFile(pathToBoardsFile, "utf8").then(data => {
       let json = JSON.parse(data);
-      json.push(JSON.parse(request.body.data));
+      const index = json.findIndex(item => item.name === JSON.parse(body).name);
+      json[index] = JSON.parse(body);
 
-      fs.writeFile(
-        pathToBoardsFile,
-        JSON.stringify(json),
-        function (err, result) {
-          if (err) {
-            logger.error(err.message);
-            response.end();
-          }
-          logger.info("Board has been successfully added");
-          response.end("Board has been successfully added");
-        }
-      );
+      fs.writeFile(pathToBoardsFile, JSON.stringify(json));
     });
   }
 
-  static updateBoard(request, response) {
-    fs.readFile(pathToBoardsFile, "utf8", (err, data) => {
-      if (err) {
-        logger.error(err.message);
-        return;
-      }
+  static async deleteBoard(body) {
+    await fs.readFile(pathToBoardsFile, "utf8").then(data => {
       let json = JSON.parse(data);
-      const index = json.findIndex(
-        item => item.name === JSON.parse(request.body.data).name
-      );
-      json[index] = JSON.parse(request.body.data);
-
-      fs.writeFile(
-        pathToBoardsFile,
-        JSON.stringify(json),
-        function (err, result) {
-          if (err) {
-            logger.error(err.message);
-            response.end();
-          }
-          logger.info("Board has been successfully updated");
-          response.end("Board has been successfully updated");
-        }
-      );
-    });
-  }
-
-  static deleteBoard(request, response) {
-    fs.readFile(pathToBoardsFile, "utf8", (err, data) => {
-      if (err) {
-        logger.error(err.message);
-        return;
-      }
-      let json = JSON.parse(data);
-      const index = json.findIndex(
-        item => item.name === JSON.parse(request.body.data).name
-      );
+      const index = json.findIndex(item => item.name === JSON.parse(body).name);
       json.splice(index, 1);
 
-      fs.writeFile(
-        pathToBoardsFile,
-        JSON.stringify(json),
-        function (err, result) {
-          if (err) {
-            logger.error(err.message);
-            response.end();
-          }
-          logger.info("Board has been successfully deleted");
-          response.end("Board has been successfully deleted");
-        }
-      );
+      fs.writeFile(pathToBoardsFile, JSON.stringify(json));
     });
   }
 }
 
-module.exports = boardsService;
+module.exports = BoardsService;

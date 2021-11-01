@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const logger = require("../../Logger");
 const Joi = require("joi");
-const boardsService = require("../services/boards");
+const BoardsService = require("../services/boards");
 
 const router = express.Router();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -43,21 +43,54 @@ const checkRole = (req, res, next) => {
 router
   .route("/")
   .get(function (request, response) {
-    boardsService.getBoards(request, response);
+    (async () => {
+      try {
+        const res = await BoardsService.getBoards(response);
+        response.end(res);
+        logger.info("Boards were successfully recieved");
+      } catch (error) {
+        logger.error(error.message);
+        response.end();
+      }
+    })();
   })
   .post(
     urlencodedParser,
     validateBody,
     checkRole,
     function (request, response) {
-      boardsService.addBoard(request, response);
+      (async () => {
+        try {
+          await BoardsService.addBoard(request.body.data);
+          logger.info("Board has been successfully added");
+          response.end("Board has been successfully added");
+        } catch (error) {
+          logger.error(error.message);
+        }
+      })();
     }
   )
   .put(urlencodedParser, validateBody, checkRole, function (request, response) {
-    boardsService.updateBoard(request, response);
+    (async () => {
+      try {
+        await BoardsService.updateBoard(request.body.data);
+        logger.info("Board has been successfully updated");
+        response.end("Board has been successfully updated");
+      } catch (error) {
+        logger.error(error.message);
+      }
+    })();
   })
   .delete(urlencodedParser, checkRole, function (request, response) {
-    boardsService.deleteBoard(request, response);
+    (async () => {
+      try {
+        await BoardsService.deleteBoard(request.body.data);
+        logger.info("Board has been successfully deleted");
+        response.end("Board has been successfully deleted");
+      } catch (error) {
+        logger.error(error.message);
+      }
+    })();
   });
 
 module.exports = router;
